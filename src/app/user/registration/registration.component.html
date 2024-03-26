@@ -1,0 +1,36 @@
+<div class="row text mt-4">
+  <div class="col-md-8 offset-2">
+    <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
+
+      <div class="form-group mb-2">
+        <label class="control-label">Имя пользователя</label>
+        <input formControlName="fullName" class="form-control"/>
+        <span *ngIf="fullName.hasError('required') && fullName.touched" class="text-danger">Имя пользователя является обязательным полем</span>
+      </div>
+      <div class="form-group mb-2">
+        <label class="control-label">Email </label>
+        <input formControlName="email" type="email" class="form-control"/>
+        <span *ngIf="email.hasError('email') && email.touched" class="text-danger">Пожалуйста, введите валидный Email</span>
+    </div>
+    <div class="form-group mb-2">
+        <label class="control-label">Пароль </label>
+        <input formControlName="password" type="password" class="form-control"/>
+        <span *ngIf="(password.hasError('minlength') || password.hasError('required')) && password.touched" class="text-danger">
+            Пароль должен содержать не менее 6 символов</span>
+    </div>
+    <div class="form-group mb-2">
+      <label class="control-label">Подтвердите пароль </label>
+      <input formControlName="confirmPassword" type="password" class="form-control"/>
+      <span *ngIf="form.hasError('mismatch') && (password.touched || confirmPassword.touched)" class="text-danger">
+        Пароли не совпадают</span>
+    </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-main float-right" [disabled]="!form.valid">
+          Зарегистрироваться
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

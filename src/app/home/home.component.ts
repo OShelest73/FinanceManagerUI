@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  constructor(private router: Router){}
 
+  ngOnInit(): void {
+    
+  }
+
+  onLogout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/user/login']);
+  }
 }

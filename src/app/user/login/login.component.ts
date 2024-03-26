@@ -22,6 +22,13 @@ export class LoginComponent implements OnInit{
 
   }
 
+  ngOnInit(): void {
+    if(localStorage.getItem('token') != null)
+    {
+      this.router.navigateByUrl('/home');
+    }
+  }
+
   form = new FormGroup({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', Validators.required)
@@ -37,7 +44,7 @@ export class LoginComponent implements OnInit{
   onSubmit(){
     this.service.login(this.email.value, this.password.value)
     .pipe(
-      catchError(this.handleError) // Обработка ошибок
+      catchError(this.handleError)
     )
     .subscribe(
       (response) => {
@@ -65,10 +72,6 @@ export class LoginComponent implements OnInit{
       console.error('Ошибка на стороне сервера:', error.status, error.error);
     }
     return throwError(error);
-  }
-
-  ngOnInit(): void {
-    this.form.reset();
   }
 
 }

@@ -30,6 +30,11 @@ export class UserService {
     return this.http.post(this.baseUrl + '/auth/login', body);
   }
 
+  //Если буду стучаться с токеном
+  /*getSmth(){
+    return this.http.get(this.BaseUrl + '/UserProfile');
+  }
+
   /*test(): Observable<any> {
     return this.http.get('https://localhost:7144/api/auth');
   }*/

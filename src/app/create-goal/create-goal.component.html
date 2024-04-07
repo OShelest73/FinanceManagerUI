@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="container mt-5">
+    <div class="col-md-10 offset-1">
+        <div class="row text">
+            <div>
+                <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
+                    <div class="form-group mb-2">
+                        <label class="control-label">Количество денег </label>
+                        <input formControlName="moneyAmount" class="form-control"/>
+                        <span *ngIf="moneyAmount.hasError('required') && moneyAmount.touched" class="text-danger">Пожалуйста, введите значение</span>
+                        <span *ngIf="moneyAmount.hasError('notZero') && moneyAmount.touched" class="text-danger">Значение не должно быть равно 0</span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="control-label">Дата начала</label>
+                        <input type="datetime-local" formControlName="startDate" class="form-control"/>
+                        <span *ngIf="startDate.hasError('required') && startDate.touched" class="text-danger">Пожалуйста, введите дату начала</span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="control-label">Дата окончания</label>
+                        <input type="datetime-local" formControlName="dueDate" class="form-control"/>
+                        <span *ngIf="dueDate.hasError('required') && dueDate.touched" class="text-danger">Пожалуйста, введите дату завершения</span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="control-label">Категория</label>
+                        <select formControlName="categoryId" class="form-control">
+                            <option *ngFor="let category of categories" [value]="category.id">{{category.categoryName}}</option>
+                        </select>
+                        <span *ngIf="categoryId.hasError('required') && categoryId.touched" class="text-danger">Пожалуйста, выберите категорию</span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-main float-right" [disabled]="!form.valid || categories.length === 0">
+                        Создать
+                        </button>
+                    </div>       
+                </form>
+            </div>
+        </div>
+    </div>

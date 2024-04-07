@@ -1,0 +1,14 @@
+<!--<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand mx-3" routerLink="/home">Finance Manager</a>
+    <a class="navbar-brand mx-3" routerLink="" >Транзакции</a>
+    <button class="btn btn-danger mx-3 my-2 my-sm-0" (click)="onLogout()">Выйти</button>
+</nav>-->
+
+<div class="px-5 pt-3 nav-links navbar navbar-dark bg-dark">
+    <a routerLink="/home" class="logo-link nav-link navbar-brand">Finance Manager</a>
+    <div class="nav-section navbar-brand">
+        <a routerLink="/transactions" class="nav-link navbar-brand">Транзакции</a>
+        <a class="nav-link navbar-brand">Оповещения</a>
+        <a class="nav-link navbar-brand" (click)="onLogout()">Выйти</a>
+    </div>
+</div>

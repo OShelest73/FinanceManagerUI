@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+.nav-links {
+    display: flex;
+    text-align: center;
+    min-height: 2rem;
+}
+
+.nav-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-link {
+    padding-left: 1rem;
+    font-size: 18px;
+}
+
+.logo-link{
+    text-align: left;
+    font-size: 18px;
+}
+
 #toast-container > div {
     opacity: 1;
 }
@@ -9,7 +30,7 @@
 }
 
 .toast-error {
-    background-color: #f44336;
+    background-color: #d02c20;
     color: white;
 }
 
@@ -58,4 +79,49 @@
 
 .tab-header h2:focus {
     outline: none;
+}
+
+/* Elements */
+
+.element-entry {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+}
+
+.element-entry-text {
+    display: flex;
+    flex-grow: 1;
+}
+
+.element-entry-actions {
+    justify-content: flex-end;
+}
+
+.task-content {
+    width: 70%;
+    margin: 20px 0;
+    border-radius: 20px;
+}
+
+.task-text {
+    width: 50%;
+}
+
+.task-info {
+    width: 20%;
+}
+html, body { 
+    height: 100%;
+}
+body { 
+    margin: 0; 
+    font-family: Roboto, 
+    "Helvetica Neue", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
 }

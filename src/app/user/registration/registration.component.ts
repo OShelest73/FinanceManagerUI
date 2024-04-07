@@ -51,7 +51,7 @@ export class RegistrationComponent implements OnInit{
   onSubmit() {
     this.service.register(this.fullName.value, this.email.value, this.password.value)
     .pipe(
-      catchError(this.handleError) // Обработка ошибок
+      catchError(this.handleError)
     )
     .subscribe(
       (response) => {

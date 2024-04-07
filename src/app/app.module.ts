@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { ToastrModule } from 'ngx-toastr';
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './user/login/login.component';
@@ -13,6 +14,10 @@ import { UserComponent } from './user/user.component';
 import { UserService } from './services/user.service';
 import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { HeaderComponent } from './header/header.component';
+import { CreateWalletComponent } from './create-wallet/create-wallet.component';
+import { CreateGoalComponent } from './create-goal/create-goal.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     LoginComponent,
     RegistrationComponent,
     UserComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    CreateWalletComponent,
+    CreateGoalComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
       progressAnimation: 'increasing',
       enableHtml: true,
       tapToDismiss: true
-    })
+    }),
+    MatProgressBarModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,

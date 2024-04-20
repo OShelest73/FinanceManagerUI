@@ -5,23 +5,24 @@
             <div>
                 <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
                     <div class="form-group mb-2">
-                        <label class="control-label">Количество денег </label>
+                        <label class="control-label">Сумма транзакции </label>
                         <input formControlName="moneyAmount" class="form-control"/>
                         <span *ngIf="moneyAmount.hasError('required') && moneyAmount.touched" class="text-danger">Пожалуйста, введите значение</span>
                         <span *ngIf="moneyAmount.hasError('notZero') && moneyAmount.touched" class="text-danger">Значение не должно быть равно 0</span>
                     </div>
                     <div class="form-group mb-2">
-                        <label class="control-label">Дата начала</label>
-                        <input type="datetime-local" formControlName="startDate" class="form-control"/>
-                        <span *ngIf="startDate.hasError('required') && startDate.touched" class="text-danger">Пожалуйста, введите дату начала</span>
+                        <label class="control-label">Комментарий к транзакции (необязательно):</label>
+                        <input type="text" formControlName="comment" class="form-control"/>
                     </div>
                     <div class="form-group mb-2">
-                        <label class="control-label">Дата окончания</label>
-                        <input type="datetime-local" formControlName="dueDate" class="form-control"/>
-                        <span *ngIf="dueDate.hasError('required') && dueDate.touched" class="text-danger">Пожалуйста, введите дату завершения</span>
+                        <label class="control-label">Со счёта</label>
+                        <select formControlName="walletId" class="form-control">
+                            <option *ngFor="let wallet of wallets" [value]="wallet.id">{{wallet.walletName}}</option>
+                        </select>
+                        <span *ngIf="walletId.hasError('required') && walletId.touched" class="text-danger">Пожалуйста, выберите счёт</span>
                     </div>
                     <div class="form-group mb-2">
-                        <label class="control-label">Категория</label>
+                        <label class="control-label">Категория:</label>
                         <select formControlName="categoryId" class="form-control">
                             <option *ngFor="let category of categories" [value]="category.id">{{category.categoryName}}</option>
                         </select>

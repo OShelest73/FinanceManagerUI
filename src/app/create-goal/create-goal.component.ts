@@ -39,7 +39,7 @@ export class CreateGoalComponent implements OnInit {
       dueDate: ['', Validators.required],
       categoryId: ['', Validators.required]
     });
- }
+  }
 
   get moneyAmount(): FormControl {
     return this.form.get('moneyAmount') as FormControl;

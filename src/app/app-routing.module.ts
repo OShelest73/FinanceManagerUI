@@ -8,6 +8,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { CreateWalletComponent } from './create-wallet/create-wallet.component';
 import { CreateGoalComponent } from './create-goal/create-goal.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { CreateTransactionComponent } from './transactions/create-transaction/create-transaction.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'createwallet', component: CreateWalletComponent, canActivate: [AuthGuard] },
   { path: 'creategoal', component: CreateGoalComponent, canActivate: [AuthGuard] },
-  { path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] }
+  { path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
+  { path: 'transactions/create', component: CreateTransactionComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -1,7 +1,32 @@
 <app-header></app-header>
-
-<div class="container mt-5">
-    <div class="col-md-12">
-        <div>Транзакции</div>
+<router-outlet>
+    <div class="container mt-5">
+        <div class="col-md-12">
+            <div class="row mb-2">
+                <div class="row col-md-4">
+                    <a routerLink="/transactions/create">Создать транзакцию</a>
+                </div>
+            </div>
+            <h2 class="card-title">Транзакции</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <div class="mt-2" *ngIf="transactions.length == 0">Транзакции отсутствуют</div>
+                    <thead>
+                        <tr>
+                            <th class="sort-column" (click)="sortTransactions('amount')">Сумма</th>
+                            <th class="sort-column" (click)="sortTransactions('createdAt')">Дата</th>
+                            <th class="sort-column" (click)="sortTransactions('category')">Категория</th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.createdAt}}</td>
+                        <td>{{transaction.category.categoryName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
+</router-outlet>

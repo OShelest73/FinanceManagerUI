@@ -125,3 +125,8 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
+.sort-column {
+    cursor: pointer;
+    font-size: 16px;
+}

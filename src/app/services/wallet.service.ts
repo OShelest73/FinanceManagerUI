@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Wallet } from '../interfaces/Wallet';
+import { SelectWallet, Wallet } from '../interfaces/Wallet';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -21,6 +21,15 @@ export class WalletService {
     let params = new HttpParams().set('userId', userId.toString());
 
     return this.http.get<Wallet[]>(this.baseUrl + '/wallet', { params })
+    .pipe(
+      map(data => data)
+    );
+  }
+
+  getWalletsToSelect(userId: number): Observable<SelectWallet[]> {
+    let params = new HttpParams().set('userId', userId.toString());
+
+    return this.http.get<SelectWallet[]>(this.baseUrl + '/wallet/select-wallet', { params })
     .pipe(
       map(data => data)
     );

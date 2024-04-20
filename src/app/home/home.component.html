@@ -13,7 +13,7 @@
                                     {{goal.category.categoryName}}
                                 </div>
                                 <div class="task-text">
-                                    Цель: {{goal.moneyAmount}}
+                                    Прогресс: {{goal.currentTotal}}/{{goal.moneyAmount}}
                                 </div>
                                 <mat-progress-bar [mode]="'determinate'"
                                 [value]="goal.currentTotal ? goal.moneyAmount / goal.currentTotal : 0"></mat-progress-bar>

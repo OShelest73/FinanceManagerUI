@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { ToastrModule } from 'ngx-toastr';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
@@ -18,6 +18,8 @@ import { HeaderComponent } from './header/header.component';
 import { CreateWalletComponent } from './create-wallet/create-wallet.component';
 import { CreateGoalComponent } from './create-goal/create-goal.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { CreateTransactionComponent } from './transactions/create-transaction/create-transaction.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     HeaderComponent,
     CreateWalletComponent,
     CreateGoalComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    CreateTransactionComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,12 +46,15 @@ import { TransactionsComponent } from './transactions/transactions.component';
       enableHtml: true,
       tapToDismiss: true
     }),
-    MatProgressBarModule
+    MatProgressBarModule,
+    FormsModule
   ],
-  providers: [UserService, {
+  providers: [
+    DatePipe,
+    UserService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true
+    multi: true,
   }],
   bootstrap: [AppComponent]
 })

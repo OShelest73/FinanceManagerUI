@@ -44,7 +44,7 @@ export class CreateWalletComponent implements OnInit{
   }
 
   submitWallet(){
-    this.service.createWallet(this.walletName.value, this.moneyAmount.value, this.jwtService.getUserId()).subscribe(
+    this.service.createWallet(this.walletName.value, this.moneyAmount.value, Number(this.jwtService.getUserId())).subscribe(
       response => {
          console.log('Кошелек успешно создан:', response);
          this.router.navigateByUrl("home");

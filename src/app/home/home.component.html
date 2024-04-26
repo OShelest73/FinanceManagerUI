@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Финансовые цели: (<a routerLink="/creategoal">Создать</a>)</h2>
                         <div *ngIf="goals.length == 0"> Финансовые цели отсутствуют</div>
-                        <div *ngFor="let goal of goals" class="element-entry">
+                        <a [routerLink]="'/goal/' + goal.id" *ngFor="let goal of goals" class="element-entry">
                             <div class="element-entry-text">
                                 <div class="task-text">
                                     {{goal.category.categoryName}}
@@ -16,9 +16,9 @@
                                     Прогресс: {{goal.currentTotal}}/{{goal.moneyAmount}}
                                 </div>
                                 <mat-progress-bar [mode]="'determinate'"
-                                [value]="goal.currentTotal ? goal.moneyAmount / goal.currentTotal : 0"></mat-progress-bar>
+                                [value]="goal.currentTotal ? goal.currentTotal / goal.moneyAmount * 100 : 0"></mat-progress-bar>
                             </div>
-                        </div>                        
+                        </a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Счета: (<a routerLink="/createwallet">Создать</a>)</h2>
                         <div *ngIf="wallets.length == 0"> Счета отсутствуют</div>
-                        <div *ngFor="let wallet of wallets" class="element-entry">
+                        <a [routerLink]="'/wallet/' + wallet.id" *ngFor="let wallet of wallets" class="element-entry">
                             <div class="element-entry-text">
                                 <div class="task-text">
                                     {{wallet.walletName}}
@@ -36,7 +36,7 @@
                                     Баланс: {{wallet.moneyAmount}}
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

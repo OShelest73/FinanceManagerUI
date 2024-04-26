@@ -6,7 +6,8 @@ export interface FinancialGoal {
     startDate: Date,
     dueDate: Date,
     currentTotal: number,
-    category: Category
+    category: Category,
+    isIncome: Boolean
 }
 
 export interface FinancialGoalPreview {

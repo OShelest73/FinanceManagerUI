@@ -1,25 +1,31 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtService } from '../services/jwt.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from '../services/transaction.service';
+import { JwtService } from '../services/jwt.service';
 import { TransactionPreview } from '../interfaces/Transaction';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
+import { FinancialGoalService } from '../services/financial-goal.service';
+import { FinancialGoal } from '../interfaces/FinancialGoal';
 
 @Component({
-  selector: 'app-transactions',
-  templateUrl: './transactions.component.html',
+  selector: 'app-financial-goal',
+  templateUrl: './financial-goal.component.html',
   styles: [
   ]
 })
-export class TransactionsComponent {
+export class FinancialGoalComponent {
   constructor(
-    private router: Router,
+    private route: ActivatedRoute,
     private transactionService: TransactionService,
+    private goalService: FinancialGoalService,
     private jwtService: JwtService
   ){}
 
+  goalId!: string;
+  goal!: FinancialGoal;
   transactions: TransactionPreview[] = [];
   private transactionSubscription!: Subscription;
+  private goalSubscription!: Subscription;
   searchText = '';
   sortKey = '';
   sortAscending = true;
@@ -79,20 +85,38 @@ export class TransactionsComponent {
   }
 
   ngOnInit(): void {
-    this.transactionSubscription = this.transactionService.getTransactions(this.jwtService.getUserId())
-    .subscribe(
-      (transactions: TransactionPreview[]) => {
-        this.transactions = transactions;
-      },
-      error => {
-        console.error('Ошибка при получении транзакций:', error);
-      }
-    );
+    this.goalId = this.route.snapshot.params['id'];
+  
+    this.goalSubscription = this.goalService.getGoalDetailed(this.goalId, this.jwtService.getUserId())
+      .pipe(
+        switchMap((goal: FinancialGoal) => {
+          this.goal = goal;
+          return this.transactionService.getGoalTransactions(
+            this.jwtService.getUserId(), 
+            this.goalId, String(this.goal.isIncome),
+            this.parseDateString(String(this.goal.startDate)).toISOString(),
+            this.parseDateString(String(this.goal.dueDate)).toISOString()
+          )
+        })
+      )
+      .subscribe(
+        (transactions: TransactionPreview[]) => {
+          this.transactions = transactions;
+          console.log(this.goal.startDate);
+          console.log(this.goal.dueDate);
+        },
+        error => {
+          console.error('Ошибка при получении транзакций:', error);
+        }
+      );
   }
 
   ngOnDestroy(){
     if(this.transactionSubscription) {
       this.transactionSubscription.unsubscribe();
+    }
+    if(this.goalSubscription) {
+      this.goalSubscription.unsubscribe();
     }
   }
 }

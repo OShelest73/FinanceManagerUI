@@ -24,7 +24,7 @@ export class JwtService {
     }
   }
 
-  public getUserId(): number {
+  public getUserId(): string {
     const decodedToken = this.decodeToken();
     return decodedToken['userId'];
   }

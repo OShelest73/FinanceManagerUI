@@ -20,6 +20,9 @@ import { CreateGoalComponent } from './create-goal/create-goal.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { CreateTransactionComponent } from './transactions/create-transaction/create-transaction.component';
 import { DatePipe } from '@angular/common';
+import { FinancialGoalComponent } from './financial-goal/financial-goal.component';
+import { TransactionComponent } from './transactions/transaction/transaction.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { DatePipe } from '@angular/common';
     CreateGoalComponent,
     TransactionsComponent,
     CreateTransactionComponent,
+    FinancialGoalComponent,
+    TransactionComponent,
+    WalletComponent,
   ],
   imports: [
     BrowserModule,

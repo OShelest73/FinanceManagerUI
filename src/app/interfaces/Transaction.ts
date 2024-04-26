@@ -4,7 +4,7 @@ export interface Transaction {
     id: number,
     amount: number,
     comment: string,
-    createdAt: Date,
+    createdAt: string,
     category: Category 
 }
 
@@ -18,6 +18,7 @@ export interface TransactionPreview {
 export interface CreateTransaction {
     amount: number,
     comment: string,
+    createdAt: string | null,
     categoryId: number,
     walletId: Number
 }

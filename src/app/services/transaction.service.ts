@@ -17,10 +17,34 @@ export class TransactionService {
 
   baseUrl: string = environment.apiBaseUrl;
 
-  getTransactions(userId: number): Observable<TransactionPreview[]> {
-    let params = new HttpParams().set('userId', userId.toString());
+  getTransactionDetailed(transactionId: string): Observable<Transaction> {
+    let params = new HttpParams().set('transactionId', transactionId);
+
+    return this.http.get<Transaction>(this.baseUrl + '/MoneyTransaction/detailed-transaction', { params })
+    .pipe(
+      map(data => data)
+    );
+  }
+
+  getTransactions(userId: string): Observable<TransactionPreview[]> {
+    let params = new HttpParams().set('userId', userId);
 
     return this.http.get<TransactionPreview[]>(this.baseUrl + '/MoneyTransaction', { params })
+    .pipe(
+      map(data => data)
+    );
+  }
+
+  getGoalTransactions(userId: string, goalId: string, isIncome: string, startDate: string, dueDate: string):
+   Observable<TransactionPreview[]> {
+    let params = new HttpParams()
+      .set('userId', userId)
+      .set('goalId', goalId)
+      .set('isIncome', isIncome)
+      .set('startDate', startDate)
+      .set('dueDate', dueDate);
+
+    return this.http.get<TransactionPreview[]>(this.baseUrl + '/MoneyTransaction/goal-transactions', { params })
     .pipe(
       map(data => data)
     );
@@ -30,6 +54,7 @@ export class TransactionService {
     const body = {
       Amount: moneyTransaction.amount,
       Comment: moneyTransaction.comment,
+      CreatedAt: moneyTransaction.createdAt,
       WalletId: moneyTransaction.walletId,
       CategoryId: moneyTransaction.categoryId,
       UserId: userId
@@ -41,5 +66,16 @@ export class TransactionService {
         return throwError(error);
       })
     );
- }
+  }
+
+  DeleteTransaction(transactionId: string): Observable<any> {
+    let params = new HttpParams().set('transactionId', transactionId);
+
+    return this.http.delete<any>(this.baseUrl + '/MoneyTransaction', {params}).pipe(
+      catchError(error => {
+        console.error('Ошибка при удалении транзакции:', error);
+        return throwError(error);
+      })
+    )
+  }
 }

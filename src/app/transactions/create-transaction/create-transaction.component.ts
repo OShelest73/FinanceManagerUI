@@ -44,6 +44,7 @@ export class CreateTransactionComponent {
     this.form = this.fb.group({
       moneyAmount: [0, [Validators.required, this.notZeroValidator()]],
       comment: [''],
+      createdAt: [''],
       walletId: ['', Validators.required],
       categoryId: ['', Validators.required]
     });
@@ -57,6 +58,10 @@ export class CreateTransactionComponent {
     return this.form.get('comment') as FormControl;
   }
 
+  get createdAt(): FormControl {
+    return this.form.get('createdAt') as FormControl;
+  }
+
   get walletId(): FormControl {
     return this.form.get('walletId') as FormControl;
   }
@@ -66,18 +71,24 @@ export class CreateTransactionComponent {
   }
 
   onSubmit() {
+    let createdAt = null;
+    if (this.createdAt.value) {
+      createdAt = new Date(this.createdAt.value);
+      if (isNaN(createdAt.getTime())) {
+        createdAt = null;
+      }
+    }
 
     if (this.form.valid) {
       const moneyTransaction: CreateTransaction = {
         amount: this.moneyAmount.value,
         comment: this.comment.value,
+        createdAt: createdAt !== null ? createdAt.toISOString() : null,
         categoryId: this.categoryId.value,
         walletId: this.walletId.value
       };
 
-      console.log(this.jwtService.getUserId());
-
-      this.service.createTransaction(moneyTransaction, this.jwtService.getUserId()).subscribe(
+      this.service.createTransaction(moneyTransaction, Number(this.jwtService.getUserId())).subscribe(
         response => {
           this.router.navigate(['/transactions']);
         },

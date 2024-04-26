@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from 'src/environments/environment.development';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CreateFinancialGoal, FinancialGoalPreview } from '../interfaces/FinancialGoal';
+import { CreateFinancialGoal, FinancialGoal, FinancialGoalPreview } from '../interfaces/FinancialGoal';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,17 @@ export class FinancialGoalService {
     let params = new HttpParams().set('userId', userId.toString());
 
     return this.http.get<FinancialGoalPreview[]>(this.baseUrl + '/financialgoal', { params })
+    .pipe(
+      map(data => data)
+    );
+  }
+  
+  getGoalDetailed(goalId: string, userId: string): Observable<FinancialGoal> {
+    let params = new HttpParams()
+    .set('userId', userId)
+    .set('goalId', goalId);
+
+    return this.http.get<FinancialGoal>(this.baseUrl + '/financialgoal/get-detailed', { params })
     .pipe(
       map(data => data)
     );

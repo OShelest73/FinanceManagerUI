@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.error('Ошибка при получении финансовых целей:', error);
       }
     );
+
+    console.log(this.goals);
     
     this.walletSubscription = this.walletService.getWallets(Number(this.jwtService.getUserId()))
     .subscribe(
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.error('Ошибка при получении счетов:', error);
       }
     );
+
   }
 
   ngOnDestroy(){

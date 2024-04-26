@@ -15,6 +15,10 @@
                         <input type="text" formControlName="comment" class="form-control"/>
                     </div>
                     <div class="form-group mb-2">
+                        <label class="control-label">Дата транзакции (необязательно)</label>
+                        <input type="datetime-local" formControlName="createdAt" class="form-control"/>
+                    </div>
+                    <div class="form-group mb-2">
                         <label class="control-label">Со счёта</label>
                         <select formControlName="walletId" class="form-control">
                             <option *ngFor="let wallet of wallets" [value]="wallet.id">{{wallet.walletName}}</option>

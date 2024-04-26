@@ -17,6 +17,15 @@ export class WalletService {
 
   baseUrl: string = environment.apiBaseUrl;
 
+  getWalletDetailed(walletId: number): Observable<Wallet> {
+    let params = new HttpParams().set('walletId', walletId.toString());
+
+    return this.http.get<Wallet>(this.baseUrl + '/wallet', { params })
+    .pipe(
+      map(data => data)
+    );
+  }
+
   getWallets(userId: number): Observable<Wallet[]> {
     let params = new HttpParams().set('userId', userId.toString());
 
@@ -26,8 +35,8 @@ export class WalletService {
     );
   }
 
-  getWalletsToSelect(userId: number): Observable<SelectWallet[]> {
-    let params = new HttpParams().set('userId', userId.toString());
+  getWalletsToSelect(userId: string): Observable<SelectWallet[]> {
+    let params = new HttpParams().set('userId', userId);
 
     return this.http.get<SelectWallet[]>(this.baseUrl + '/wallet/select-wallet', { params })
     .pipe(

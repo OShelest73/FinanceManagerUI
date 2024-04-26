@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container mt-5">
+    <div class="col-md-12">
+        <div class="row mb-2">
+            <div class="row task-detail-row">
+                <div class="col-11 task-detail">
+                    <div class="task-detail-text">
+                        <div class="mb-2">Сумма транзакции: {{transaction.amount}}</div>
+                        <div class="mb-2">Дата транзакции: {{transaction.createdAt}}</div>
+                        <div class="mb-2 task-detail-task">Комментарий: {{transaction.comment}}</div>
+                        <div class="mb-2 task-detail-task">Категория: {{transaction.category.categoryName}}</div>
+                        <div>
+                            <a class="btn btn-outline-primary" >Редактировать</a>
+                            <a class="btn btn-outline-danger" (click)="onDelete()">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 close-button-section">
+                    <a routerLink="/transactions" class="btn btn-close"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

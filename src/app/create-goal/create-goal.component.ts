@@ -68,7 +68,7 @@ export class CreateGoalComponent implements OnInit {
         startDate: startDate.toISOString(),
         dueDate: dueDate.toISOString(),
         categoryId: this.categoryId.value,
-        userId: this.jwtService.getUserId()
+        userId: Number(this.jwtService.getUserId())
       };
 
       this.service.createGoal(financialGoal).subscribe(

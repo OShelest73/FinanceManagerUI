@@ -92,6 +92,9 @@
 
 .element-entry-text {
     display: flex;
+    align-items: center;
+    color: black;
+    font-size: 16px;
     flex-grow: 1;
 }
 
@@ -107,11 +110,22 @@
 
 .task-text {
     width: 50%;
+    margin-right: 15px;
 }
 
 .task-info {
     width: 20%;
 }
+
+.task-detail {
+    font-size: 16px;
+}
+
+.row-element {
+    font-size: 16px;
+    cursor: pointer;
+}
+
 html, body { 
     height: 100%;
 }

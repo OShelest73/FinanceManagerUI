@@ -59,10 +59,22 @@ export class TransactionService {
     );
   }
 
-  calculateTotals(userId: string): Observable<Record<string, number>> {
+  calculateConsumptionTotals(userId: string): Observable<Record<string, number>> {
     let params = new HttpParams().set('userId', userId);
 
-    return this.http.get<Record<string, number>>(`${this.baseUrl}/moneytransaction/calculate-totals`, { params })
+    return this.http.get<Record<string, number>>(`${this.baseUrl}/moneytransaction/calculate-total-consumptions`, { params })
+    .pipe(
+      catchError(error => {
+        console.error('Ошибка при получении информации:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  calculateIncomeTotals(userId: string): Observable<Record<string, number>> {
+    let params = new HttpParams().set('userId', userId);
+
+    return this.http.get<Record<string, number>>(`${this.baseUrl}/moneytransaction/calculate-total-incomes`, { params })
     .pipe(
       catchError(error => {
         console.error('Ошибка при получении информации:', error);

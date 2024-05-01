@@ -5,20 +5,44 @@
             <div class="row task-detail-row">
                 <div class="col-11 task-detail">
                     <div class="task-detail-text">
-                        <div class="mb-2">Сумма транзакции: {{transaction.amount}}</div>
-                        <div class="mb-2">Дата транзакции: {{transaction.createdAt}}</div>
-                        <div class="mb-2 task-detail-task">Комментарий: {{transaction.comment}}</div>
-                        <div class="mb-2 task-detail-task">Категория: {{transaction.category.categoryName}}</div>
+                        <div class="mb-2">Название кошелька: {{wallet.walletName}}</div>
+                        <div class="mb-2">Сумма в наличии: {{wallet.moneyAmount}}</div>
                         <div>
-                            <a class="btn btn-outline-primary" >Редактировать</a>
+                            <a class="btn btn-outline-primary" [routerLink]="'/wallet/update/' + walletId">Редактировать</a>
                             <a class="btn btn-outline-danger" (click)="onDelete()">Удалить</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-1 close-button-section">
-                    <a routerLink="/transactions" class="btn btn-close"></a>
+                    <a routerLink="/home" class="btn btn-close"></a>
                 </div>
             </div>
+        </div>
+        <h2 class="card-title">Транзакции</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <div class="mt-2" *ngIf="transactions.length == 0">Транзакции отсутствуют</div>
+                <thead>
+                    <tr>
+                        <th class="sort-column" (click)="sortTransactions('amount')">
+                            Сумма {{ getSortSymbol('amount') }}
+                        </th>
+                        <th class="sort-column" (click)="sortTransactions('createdAt')">
+                            Дата {{ getSortSymbol('createdAt') }}
+                        </th>
+                        <th class="sort-column" (click)="sortTransactions('category')">
+                            Категория {{ getSortSymbol('category') }}
+                        </th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr [routerLink]="'/transaction/' + transaction.id" class="row-element" *ngFor="let transaction of transactions">
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.createdAt}}</td>
+                        <td>{{transaction.category.categoryName}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

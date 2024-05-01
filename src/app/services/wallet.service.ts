@@ -17,10 +17,10 @@ export class WalletService {
 
   baseUrl: string = environment.apiBaseUrl;
 
-  getWalletDetailed(walletId: number): Observable<Wallet> {
+  getWalletDetailed(walletId: string): Observable<Wallet> {
     let params = new HttpParams().set('walletId', walletId.toString());
 
-    return this.http.get<Wallet>(this.baseUrl + '/wallet', { params })
+    return this.http.get<Wallet>(this.baseUrl + '/wallet/get-detailed', { params })
     .pipe(
       map(data => data)
     );
@@ -57,5 +57,35 @@ export class WalletService {
         return throwError(error);
       })
     );
+  }
+
+  updateWallet(wallet: Wallet, userId: string): Observable<any> {
+    const body = {
+      Id: wallet.id,
+      WalletName: wallet.walletName,
+      MoneyAmount: wallet.moneyAmount,
+      UserId: userId
+    };
+
+    console.log(body);
+
+    return this.http.put<any>(`${this.baseUrl}/wallet`, body).pipe(
+      catchError(error => {
+        console.error('Ошибка при обновлении кошелька:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+ deleteWallet(walletId: string): Observable<any> {
+  let params = new HttpParams().set('walletId', walletId);
+
+  return this.http.delete<any>(`${this.baseUrl}/wallet`, {params}).pipe(
+    catchError(error => {
+      console.error('Ошибка при удалении кошелька:', error);
+      return throwError(error);
+    })
+  )
  }
+ 
 }

@@ -36,7 +36,7 @@ export class TransactionComponent {
   }
 
   onDelete() {
-    this.transactionService.DeleteTransaction(this.transactionId).subscribe(
+    this.transactionService.deleteGoal(this.transactionId).subscribe(
       () => {
         this.router.navigate(['/transactions']);
       },

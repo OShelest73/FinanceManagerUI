@@ -16,6 +16,7 @@ import { FinancialGoal } from '../interfaces/FinancialGoal';
 export class FinancialGoalComponent {
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private transactionService: TransactionService,
     private goalService: FinancialGoalService,
     private jwtService: JwtService
@@ -102,8 +103,6 @@ export class FinancialGoalComponent {
       .subscribe(
         (transactions: TransactionPreview[]) => {
           this.transactions = transactions;
-          console.log(this.goal.startDate);
-          console.log(this.goal.dueDate);
         },
         error => {
           console.error('Ошибка при получении транзакций:', error);
@@ -118,5 +117,16 @@ export class FinancialGoalComponent {
     if(this.goalSubscription) {
       this.goalSubscription.unsubscribe();
     }
+  }
+
+  onDelete() {
+    this.goalService.deleteGoal(this.goalId).subscribe(
+      () => {
+        this.router.navigate(['/home']);
+      },
+      error => {
+        console.error('Ошибка при удалении транзакции:', error);
+      }
+    );
   }
 }

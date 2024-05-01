@@ -10,7 +10,7 @@
                         <div class="mb-2 task-detail-task">Комментарий: {{transaction.comment}}</div>
                         <div class="mb-2 task-detail-task">Категория: {{transaction.category.categoryName}}</div>
                         <div>
-                            <a class="btn btn-outline-primary" >Редактировать</a>
+                            <a [routerLink]="'/transaction/update/' + transactionId" class="btn btn-outline-primary">Редактировать</a>
                             <a class="btn btn-outline-danger" (click)="onDelete()">Удалить</a>
                         </div>
                     </div>

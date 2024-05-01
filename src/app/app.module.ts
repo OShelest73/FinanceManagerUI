@@ -23,6 +23,12 @@ import { DatePipe } from '@angular/common';
 import { FinancialGoalComponent } from './financial-goal/financial-goal.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { UpdateTransactionComponent } from './transactions/update-transaction/update-transaction.component';
+import { UpdateGoalComponent } from './update-goal/update-goal.component';
+import { UpdateWalletComponent } from './update-wallet/update-wallet.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { ChartModule } from '@syncfusion/ej2-angular-charts';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -39,6 +45,10 @@ import { WalletComponent } from './wallet/wallet.component';
     FinancialGoalComponent,
     TransactionComponent,
     WalletComponent,
+    UpdateTransactionComponent,
+    UpdateGoalComponent,
+    UpdateWalletComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +63,9 @@ import { WalletComponent } from './wallet/wallet.component';
       tapToDismiss: true
     }),
     MatProgressBarModule,
-    FormsModule
+    FormsModule,
+    ChartModule,
+    NgChartsModule
   ],
   providers: [
     DatePipe,

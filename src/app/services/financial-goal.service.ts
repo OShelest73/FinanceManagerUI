@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from 'src/environments/environment.development';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CreateFinancialGoal, FinancialGoal, FinancialGoalPreview } from '../interfaces/FinancialGoal';
+import { CreateFinancialGoal, FinancialGoal, FinancialGoalPreview, UpdateFinancialGoal } from '../interfaces/FinancialGoal';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +50,35 @@ export class FinancialGoalService {
         return throwError(error);
       })
     );
+ }
+
+ updateGoal(financialGoal: UpdateFinancialGoal): Observable<any> {
+  const body = {
+    Id: financialGoal.id,
+    MoneyAmount: financialGoal.moneyAmount,
+    StartDate: financialGoal.startDate,
+    DueDate: financialGoal.dueDate,
+    CategoryId: financialGoal.categoryId,
+    UserId: financialGoal.userId
+  };
+
+  return this.http.put<any>(`${this.baseUrl}/financialgoal`, body).pipe(
+    catchError(error => {
+      console.error('Ошибка при изменении цели:', error);
+      return throwError(error);
+    })
+  );
+}
+
+ deleteGoal(goalId: string): Observable<any> {
+  let params = new HttpParams()
+  .set('goalId', goalId);
+
+  return this.http.delete<any>(this.baseUrl + '/financialgoal', {params}).pipe(
+    catchError(error => {
+      console.error('Ошибка при удалении цели:', error);
+      return throwError(error);
+    })
+  )
  }
 }

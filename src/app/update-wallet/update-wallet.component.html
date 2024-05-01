@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<div class="container mt-5">
+    <div class="col-md-10 offset-1">
+        <div class="row text">
+            <div >
+                <form [formGroup]="form" (submit)="submitWallet()" autocomplete="off">
+
+                    <div class="form-group mb-2">
+                        <label class="control-label">Название </label>
+                        <input formControlName="walletName" class="form-control" [(ngModel)]="wallet.walletName"/>
+                        <span *ngIf="walletName.hasError('required') && walletName.touched" class="text-danger">Пожалуйста, введите валидное название</span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="control-label">Количество денег </label>
+                        <input formControlName="moneyAmount" class="form-control" [(ngModel)]="wallet.moneyAmount">
+                    </div>
+                        
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-main float-right" [disabled]="!form.valid">
+                        Изменить
+                        </button>
+                    </div>
+              
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

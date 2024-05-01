@@ -22,3 +22,12 @@ export interface CreateTransaction {
     categoryId: number,
     walletId: Number
 }
+
+export interface UpdateTransaction {
+    id: string,
+    amount: number,
+    comment: string,
+    createdAt: string | null,
+    categoryId: number,
+    walletId: Number
+}

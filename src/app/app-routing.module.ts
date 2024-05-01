@@ -12,6 +12,10 @@ import { CreateTransactionComponent } from './transactions/create-transaction/cr
 import { FinancialGoalComponent } from './financial-goal/financial-goal.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
 import { WalletComponent } from './wallet/wallet.component';
+import { UpdateTransactionComponent } from './transactions/update-transaction/update-transaction.component';
+import { UpdateGoalComponent } from './update-goal/update-goal.component';
+import { UpdateWalletComponent } from './update-wallet/update-wallet.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full'},
@@ -25,11 +29,15 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'goal/:id', component: FinancialGoalComponent, canActivate: [AuthGuard] },
   { path: 'creategoal', component: CreateGoalComponent, canActivate: [AuthGuard] },
+  { path: 'goals/update/:id', component: UpdateGoalComponent, canActivate: [AuthGuard] },
   { path: 'wallet/:id', component: WalletComponent, canActivate: [AuthGuard] },
+  { path: 'wallet/update/:id', component: UpdateWalletComponent, canActivate: [AuthGuard] },
   { path: 'createwallet', component: CreateWalletComponent, canActivate: [AuthGuard] },
   { path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
   { path: 'transaction/:id', component: TransactionComponent, canActivate: [AuthGuard] },
+  { path: 'transaction/update/:id', component: UpdateTransactionComponent, canActivate: [AuthGuard] },
   { path: 'transactions/create', component: CreateTransactionComponent, canActivate: [AuthGuard] },
+  { path: 'transactions/report', component: PieChartComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

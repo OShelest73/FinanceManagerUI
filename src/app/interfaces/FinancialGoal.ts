@@ -24,3 +24,12 @@ export interface CreateFinancialGoal {
     categoryId: number,
     userId: number
 }
+
+export interface UpdateFinancialGoal {
+    id: string,
+    moneyAmount: number,
+    startDate: string,
+    dueDate: string,
+    categoryId: number,
+    userId: number
+}

@@ -64,7 +64,20 @@ export class PieChartComponent implements OnInit {
     const context = canvas.getContext('2d');
     
     if (context && chartData) {
-      const chartColors = ['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'];
+      const chartColors = [
+        'rgba(31, 119, 180, 0.5)',   
+        'rgba(255, 127, 14, 0.5)',   
+        'rgba(44, 160, 44, 0.5)',     
+        'rgba(214, 39, 40, 0.5)',     
+        'rgba(148, 103, 189, 0.5)',   
+        'rgba(140, 86, 75, 0.5)',     
+        'rgba(227, 119, 194, 0.5)',   
+        'rgba(127, 127, 127, 0.5)',   
+        'rgba(188, 189, 34, 0.5)',    
+        'rgba(23, 190, 207, 0.5)',    
+        'rgba(174, 199, 232, 0.5)',   
+        'rgba(255, 187, 120, 0.5)'
+      ];
       const chartLabels = Object.keys(chartData);
       const chartValues = Object.values(chartData);
     
@@ -99,7 +112,7 @@ export class PieChartComponent implements OnInit {
           context.fill();
     
           const labelAngle = startAngle + sliceAngle / 2;
-          const labelRadius = radius * 0.7; // Distance of labels from the center
+          const labelRadius = radius * 0.7;
     
           const labelX = centerX + Math.cos(labelAngle) * labelRadius;
           const labelY = centerY + Math.sin(labelAngle) * labelRadius;
@@ -124,7 +137,7 @@ export class PieChartComponent implements OnInit {
         context.fill();
     
         const labelAngle = startAngle + sliceAngle / 2;
-        const labelRadius = radius * 0.7; // Distance of labels from the center
+        const labelRadius = radius * 0.7;
     
         const labelX = centerX + Math.cos(labelAngle) * labelRadius;
         const labelY = centerY + Math.sin(labelAngle) * labelRadius;

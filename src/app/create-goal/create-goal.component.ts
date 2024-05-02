@@ -38,7 +38,9 @@ export class CreateGoalComponent implements OnInit {
       startDate: ['', Validators.required],
       dueDate: ['', Validators.required],
       categoryId: ['', Validators.required]
-    });
+    },
+    { validators: this.dateOrderValidator() }
+  );
   }
 
   get moneyAmount(): FormControl {
@@ -93,4 +95,17 @@ export class CreateGoalComponent implements OnInit {
        return null;
     };
    }
+
+   dateOrderValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const startDate = control.get('startDate')?.value;
+      const dueDate = control.get('dueDate')?.value;
+  
+      if (startDate && dueDate && startDate > dueDate) {
+        return { 'dateOrder': true };
+      }
+  
+      return null;
+    };
+  }
 }

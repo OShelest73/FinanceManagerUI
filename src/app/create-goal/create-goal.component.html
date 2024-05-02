@@ -20,6 +20,7 @@
                         <input type="datetime-local" formControlName="dueDate" class="form-control"/>
                         <span *ngIf="dueDate.hasError('required') && dueDate.touched" class="text-danger">Пожалуйста, введите дату завершения</span>
                     </div>
+                    <span *ngIf="form.hasError('dateOrder') && (startDate.touched || dueDate.touched)" class="text-danger">Дата окончания не может быть раньше даты начала</span>
                     <div class="form-group mb-2">
                         <label class="control-label">Категория</label>
                         <select formControlName="categoryId" class="form-control">

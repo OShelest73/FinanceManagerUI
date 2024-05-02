@@ -1,10 +1,60 @@
 <app-header></app-header>
+
 <div class="container mt-5">
-    <div class="col-md-10 offset-1">
-        <div class="row text">
-            <div style="display: flex; justify-content: center;">
-                <canvas #canvas width="550" height="550"></canvas>
-            </div>
-        </div>
+  <div class="row text">
+    <div class="col-md-6">
+      <div id="chart1Container">
+        <h1 class="text-center">Расходы за месяц</h1>
+        <canvas #canvas width="550" height="550"></canvas>
+      </div>
     </div>
+    <div class="col-md-6">
+      <div id="chart2Container">
+        <h1 class="text-center">Доходы за месяц</h1>
+        <canvas #canvas2 width="550" height="550"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Категория</th>
+            <th>Проценты</th>
+            <th>Сумма</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of consumptionsData | keyvalue">
+            <tr>
+              <td>{{ item.key }}</td>
+              <td>{{ calculatePercentage(item.value, consumptionsData) | number:'1.2-2' }}%</td>
+              <td>{{ item.value }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Категория</th>
+            <th>Проценты</th>
+            <th>Сумма</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of incomesData | keyvalue">
+            <tr>
+              <td>{{ item.key }}</td>
+              <td>{{ calculatePercentage(item.value, incomesData) | number:'1.2-2' }}%</td>
+              <td>{{ item.value }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

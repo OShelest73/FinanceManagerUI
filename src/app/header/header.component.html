@@ -3,7 +3,7 @@
     <div class="nav-section navbar-brand">
         <a routerLink="/transactions/report" class="nav-link navbar-brand">Сводка</a>
         <a routerLink="/transactions" class="nav-link navbar-brand">Транзакции</a>
-        <a class="nav-link navbar-brand">Оповещения</a>
+        <a routerLink="/notifications" class="nav-link navbar-brand">Оповещения ({{notificationCount}})</a>
         <a class="nav-link navbar-brand" (click)="onLogout()">Выйти</a>
     </div>
 </div>

@@ -1,0 +1,25 @@
+<app-header></app-header>
+<router-outlet>
+    <div class="container mt-5">
+        <div class="col-md-10 offset-1">
+            <h2 class="card-title">Оповещения</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <div class="mt-2" *ngIf="notifications.length == 0">Оповещения отсутствуют</div>
+                    <thead>
+                        <tr>
+                            <th class="sort-column">
+                                Название
+                            </th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                            <tr [routerLink]="'/notification/' + notification.id" class="row-element" *ngFor="let notification of notifications">
+                                <td>{{notification.title}}</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</router-outlet>

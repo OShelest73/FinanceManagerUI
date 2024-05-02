@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="container mt-5">
+    <div class="col-md-10 offset-1">
+        <div class="row mb-2">
+            <div class="row task-detail-row">
+                <div class="col-11 task-detail">
+                    <div class="task-detail-text">
+                        <div class="mb-2">{{notification.title}}</div>
+                        <div class="mb-2">{{notification.notificationText}}</div>
+                        <div>
+                            <a class="btn btn-outline-danger" (click)="onDelete()">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 close-button-section">
+                    <a routerLink="/notifications" class="btn btn-close"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

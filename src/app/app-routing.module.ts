@@ -16,6 +16,8 @@ import { UpdateTransactionComponent } from './transactions/update-transaction/up
 import { UpdateGoalComponent } from './update-goal/update-goal.component';
 import { UpdateWalletComponent } from './update-wallet/update-wallet.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationDetailedComponent } from './notification-detailed/notification-detailed.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full'},
@@ -37,7 +39,9 @@ const routes: Routes = [
   { path: 'transaction/:id', component: TransactionComponent, canActivate: [AuthGuard] },
   { path: 'transaction/update/:id', component: UpdateTransactionComponent, canActivate: [AuthGuard] },
   { path: 'transactions/create', component: CreateTransactionComponent, canActivate: [AuthGuard] },
-  { path: 'transactions/report', component: PieChartComponent, canActivate: [AuthGuard] }
+  { path: 'transactions/report', component: PieChartComponent, canActivate: [AuthGuard] },
+  { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
+  { path: 'notification/:id', component: NotificationDetailedComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

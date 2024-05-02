@@ -9,8 +9,10 @@ import { JwtService } from '../services/jwt.service';
   styles: []
 })
 export class PieChartComponent implements OnInit {
-  private dataSubscription!: Subscription;
-  chartData!: Record<string, number>;
+  private consumptionsSubscription!: Subscription;
+  consumptionsData!: Record<string, number>;
+  private incomesSubscription!: Subscription;
+  incomesData!: Record<string, number>;
 
   constructor(
     private transactionService: TransactionService,
@@ -18,19 +20,30 @@ export class PieChartComponent implements OnInit {
   ) {}
 
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas2', { static: true }) canvas2!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit() {
-    const context = this.canvas.nativeElement.getContext('2d');
-    
-    this.drawChart();
+    this.drawChart(this.canvas.nativeElement, this.consumptionsData);
+    this.drawChart(this.canvas2.nativeElement, this.incomesData);
   }
 
   ngOnInit() {
-    this.dataSubscription = this.transactionService.calculateConsumptionTotals(this.jwtService.getUserId())
+    this.consumptionsSubscription = this.transactionService.calculateConsumptionTotals(this.jwtService.getUserId())
       .subscribe(
         (data: Record<string, number>) => {
-          this.chartData = data;
-          this.drawChart();
+          this.consumptionsData = data;
+          this.drawChart(this.canvas.nativeElement, this.consumptionsData);
+        },
+        error => {
+          console.error('Ошибка при получении информации:', error);
+        }
+      );
+      
+    this.incomesSubscription = this.transactionService.calculateIncomeTotals(this.jwtService.getUserId())
+      .subscribe(
+        (data: Record<string, number>) => {
+          this.incomesData = data;
+          this.drawChart(this.canvas2.nativeElement, this.incomesData);
         },
         error => {
           console.error('Ошибка при получении информации:', error);
@@ -39,19 +52,21 @@ export class PieChartComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.dataSubscription) {
-      this.dataSubscription.unsubscribe();
+    if (this.consumptionsSubscription) {
+      this.consumptionsSubscription.unsubscribe();
+    }
+    if (this.incomesSubscription) {
+      this.incomesSubscription.unsubscribe();
     }
   }
 
-  drawChart() {
-    const canvas = this.canvas.nativeElement;
+  drawChart(canvas: HTMLCanvasElement, chartData: Record<string, number>) {
     const context = canvas.getContext('2d');
     
-    if (context && this.chartData) {
+    if (context && chartData) {
       const chartColors = ['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'];
-      const chartLabels = Object.keys(this.chartData);
-      const chartValues = Object.values(this.chartData);
+      const chartLabels = Object.keys(chartData);
+      const chartValues = Object.values(chartData);
     
       const totalValue = chartValues.reduce((a, b) => a + b, 0);
       let startAngle = 0;
@@ -121,5 +136,10 @@ export class PieChartComponent implements OnInit {
         startAngle += sliceAngle;
       }
     }
+  }
+
+  calculatePercentage(value: number, data: Record<string, number>): number {
+    const totalValue = Object.values(data).reduce((a, b) => a + b, 0);
+    return (value / totalValue) * 100;
   }
 }

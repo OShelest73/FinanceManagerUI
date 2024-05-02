@@ -29,6 +29,8 @@ import { UpdateWalletComponent } from './update-wallet/update-wallet.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import { NgChartsModule } from 'ng2-charts';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationDetailedComponent } from './notification-detailed/notification-detailed.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { NgChartsModule } from 'ng2-charts';
     UpdateGoalComponent,
     UpdateWalletComponent,
     PieChartComponent,
+    NotificationsComponent,
+    NotificationDetailedComponent,
   ],
   imports: [
     BrowserModule,

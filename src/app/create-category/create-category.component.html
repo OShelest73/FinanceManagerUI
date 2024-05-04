@@ -1,0 +1,18 @@
+<div class="row col-md-4 mb-2">
+    <div class="row text">
+        <div>
+            <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
+                <div class="form-group mb-2">
+                    <label class="control-label">Название категории</label>
+                    <input formControlName="categoryName" class="form-control"/>
+                    <span *ngIf="categoryName.hasError('required') && categoryName.touched" class="text-danger">Пожалуйста, введите значение</span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-main float-right" [disabled]="!form.valid">
+                    Создать
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

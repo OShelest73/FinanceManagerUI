@@ -1,0 +1,38 @@
+<app-header></app-header>
+<router-outlet>
+    <div class="container mt-5">
+        <div class="col-md-10 offset-1">
+            <div class="row mb-2">
+                <div class="row col-md-4 mb-2">
+                    <a (click)="toggleCreateCategoryComponent()">Создать категорию</a>
+                </div>
+                <app-create-category *ngIf="showCreateComponent"></app-create-category>
+            </div>
+            <h2 class="card-title">Категории</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <div class="mt-2" *ngIf="categories.length == 0">Категории отсутствуют</div>
+                    <thead>
+                        <tr>
+                            <th class="sort-column">
+                                Название
+                            </th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                            <tr class="row-element" *ngFor="let category of categories">
+                                <td>{{category.categoryName}}</td>
+                                <td><a (click)="toggleUpdateCategoryComponent(category.id.toString())">Изменить</a></td>
+                                <td><a (click)="onDelete(category.id)">Удалить</a></td>
+                            </tr>
+                            <tr *ngIf="showUpdateComponent">
+                                <td colspan="3">
+                                  <app-update-category [categoryId]="categoryId"></app-update-category>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</router-outlet>

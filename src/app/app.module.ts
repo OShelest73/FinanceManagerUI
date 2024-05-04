@@ -31,6 +31,9 @@ import { ChartModule } from '@syncfusion/ej2-angular-charts';
 import { NgChartsModule } from 'ng2-charts';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationDetailedComponent } from './notification-detailed/notification-detailed.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CreateCategoryComponent } from './create-category/create-category.component';
+import { UpdateCategoryComponent } from './update-category/update-category.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { NotificationDetailedComponent } from './notification-detailed/notificat
     PieChartComponent,
     NotificationsComponent,
     NotificationDetailedComponent,
+    CategoriesComponent,
+    CreateCategoryComponent,
+    UpdateCategoryComponent,
   ],
   imports: [
     BrowserModule,
